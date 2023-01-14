@@ -9,8 +9,8 @@ namespace BulkyBookWeb.Models
         public int Id { get; set; }
         [Required]  
         public string? Name { get; set; }
-        [DisplayName("Display Order")]
-        [Range (1, 50, ErrorMessage= "Display order must be between 1 and 100")]
+        [DisplayName("Category")]
+        [Range(1, 50, ErrorMessage = "Display order must be between 1 and 50 degits")]
         public int DisplayOrder { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now; 
     }

@@ -1,11 +1,19 @@
 using BulkyBookWeb.Date;
+using BulkyBookWeb.IService;
+using BulkyBookWeb.Models;
+using BulkyBookWeb.Service;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IAuthenticationSer, AuthenticationSer>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<MyAppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.ConfigureApplicationCookie(op =>op.LoginPath= "/UserAuthentication/Login" );
+
 
 var app = builder.Build();
 
@@ -21,6 +29,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

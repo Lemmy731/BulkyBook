@@ -18,6 +18,17 @@ namespace BulkyBookWeb.Controllers
             IEnumerable<Category> result = _appDbContext.Categories;
             return View(result);
         }
+        // GET: Jokes/ShowSearchForm
+        public IActionResult ShowSearchForm()
+        {
+            return View();
+        }
+        //Post: Category/ShowSearchResult
+        public IActionResult ShowSearchResult(string SearchPhrase)
+        {
+            
+            return View("Index", _appDbContext.Categories.Where(x => x.Name.Contains(SearchPhrase)).OrderBy(x => x.Name).ToList());
+        }
         public IActionResult Create()
         {
            

@@ -17,15 +17,42 @@
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button>  
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+         @if(User.Identity.IsAuthenticated)
+          {
+           <li class="nav-item">
+           <a class="nav-link " asp-area="" asp-controller="Category" asp-action="Index">Category</a>
         </li>
+          }
+          @if(User.Identity.IsAuthenticated)
+          {
+          <li class="nav-item">
+         <a class="nav-link" asp-area="" asp-controller="Category" asp-action="ShowSearchForm">Search</a>
+        </li>
+          }
+        <li class="nav-item">
+          <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Display">Dashboard</a>
+        </li>
+            @if(User.IsInRole("Admin"))
+          {
+         <li class="nav-item">
+          <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Display">Admin</a>
+        </li>
+          }
+        
+                      
+        <li class="nav-item">
+          <a class="nav-link" asp-area="" asp-controller="UserAuthentication" asp-action="Logout">Logout</a>
+        </li>
+        @*<li class="nav-item">
+          <a class="nav-link" asp-area="" asp-controller="UserAuthentication" asp-action="Registration">Signup</a>
+        </li>*@
+      
        
         @*<li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
@@ -44,10 +71,10 @@
           </div>
         </li>*@
       </ul>
-      <form class="d-flex">
+      @*<form class="d-flex">
         <input class="form-control me-sm-2" type="search" placeholder="Search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      </form>*@
     </div>
   </div>
 </nav>
